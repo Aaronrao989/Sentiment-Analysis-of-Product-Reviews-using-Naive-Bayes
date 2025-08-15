@@ -1,50 +1,79 @@
-# Sentiment Analysis of Product Reviews using Naive Bayes
+# Amazon Reviews Sentiment Analysis
 
-## 📌 Project Description
+A simple sentiment analysis tool that classifies Amazon product reviews as **positive** or **negative** using Naive Bayes.
 
-This project performs **sentiment analysis** on Amazon product reviews using the **Naive Bayes** classification algorithm. It classifies customer reviews as either **positive** or **negative**, helping businesses quickly gauge product reception and user satisfaction.
+## 🚀 Quick Start
 
-## 📊 Dataset
+1. **Install dependencies**
+   ```bash
+   pip install pandas numpy scikit-learn nltk
+   python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+   ```
 
-The dataset consists of Amazon product reviews, including textual feedback and their corresponding sentiment labels. It has been preprocessed and cleaned before training.
+2. **Train the model**
+   ```bash
+   python train_model.py
+   ```
 
-## 🛠️ Technologies Used
+3. **Make predictions**
+   ```bash
+   python predict.py --text "This product is amazing!"
+   ```
 
-- Python
-- Jupyter Notebook
-- scikit-learn
-- pandas
-- numpy
-- matplotlib / seaborn
-- nltk
+## 📁 Files
 
-## 🚀 Features
+- `train_model.py` - Train the sentiment analysis model
+- `predict.py` - Make predictions on new text
+- `amazon-reviews-sentiment-analysis.ipynb` - Jupyter notebook with full analysis
+- `requirements.txt` - Python dependencies
 
-- Text preprocessing (lowercasing, punctuation removal, stopword removal)
-- Bag-of-Words / TF-IDF vectorization
-- Naive Bayes classifier
-- Model evaluation: accuracy, precision, recall, F1-score
-- Visualization: word clouds, confusion matrix, bar charts
+## 🎯 Usage Examples
 
-## 🧠 Machine Learning Workflow
+**Single prediction:**
+```bash
+python predict.py --text "Great product, love it!"
+# Output: POSITIVE
+```
 
-1. Load and explore dataset
-2. Clean and preprocess the text
-3. Convert text to numerical vectors
-4. Train a Multinomial Naive Bayes classifier
-5. Evaluate and visualize model performance
-6. Predict sentiment on new/unseen reviews
+**Interactive mode:**
+```bash
+python predict.py
+# Enter reviews one by one
+```
 
-## 📈 Example Results
+**Batch processing:**
+```bash
+python predict.py --mode batch --input reviews.txt --output results.txt
+```
 
-| Metric     | Score     |
-|------------|-----------|
-| Accuracy   | 91.2%     |
-| Precision  | 90.4%     |
-| Recall     | 89.8%     |
-| F1-Score   | 90.1%     |
+## 📊 Performance
 
-*Note: Metrics may vary depending on dataset split and parameters.*
+- **Accuracy**: 78%
+- **Dataset**: 34K+ Amazon reviews
+- **Classes**: Positive (≥4 stars) vs Negative (<4 stars)
 
-## 📂 Project Structure
+## 🛠️ How it works
 
+1. **Preprocess text** - Remove punctuation, stopwords, apply stemming
+2. **Balance data** - Equal positive/negative samples
+3. **Train Naive Bayes** - Multinomial classifier with Laplace smoothing
+4. **Evaluate** - Classification report, confusion matrix, AUC
+
+## 📋 Requirements
+
+```
+pandas>=1.3.0
+numpy>=1.21.0
+scikit-learn>=1.0.0
+nltk>=3.6.0
+```
+
+## 🤔 Need help?
+
+- Make sure your dataset is in `data/` folder
+- Run training before prediction
+- Check that NLTK data is downloaded
+
+---
+
+**⭐ Star this repo if it helped you!**
