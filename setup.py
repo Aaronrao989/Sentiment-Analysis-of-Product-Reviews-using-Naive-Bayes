@@ -25,11 +25,7 @@ def run_command(command, description):
 def create_directories():
     """Create necessary project directories"""
     directories = [
-        'data',
-        'models', 
-        'notebooks',
-        'results',
-        'logs'
+        'models'
     ]
     
     print("📁 Creating project directories...")
@@ -73,9 +69,9 @@ def create_sample_config():
     config_content = """# Amazon Reviews Sentiment Analysis - Configuration
 
 # Data paths
-DATA_PATH = "data/1429_1.csv"
-TRAIN_DATA_PATH = "data/train.csv"
-TEST_DATA_PATH = "data/test.csv"
+DATA_PATH = "data.csv"
+TRAIN_DATA_PATH = "train.csv"
+TEST_DATA_PATH = "test.csv"
 
 # Model paths
 MODEL_PATH = "models/naive_bayes_model.pkl"
@@ -247,5 +243,59 @@ def verify_installation():
             missing_files.append(file)
     
     # Check if directories exist
-    required_dirs = ['data', 'models', 'notebooks', 'results', 'logs']
-    for directory
+    required_dirs = ['models']
+    for directory in required_dirs:
+        if os.path.exists(directory):
+            print(f"  ✓ Directory found: {directory}/")
+        else:
+            print(f"  ❌ Directory missing: {directory}/")
+    
+    # Test imports
+    try:
+        import pandas
+        import numpy
+        import sklearn
+        import nltk
+        print("  ✓ All required packages imported successfully")
+    except ImportError as e:
+        print(f"  ❌ Import error: {e}")
+    
+    if missing_files:
+        print(f"\n❌ Installation incomplete. Missing: {missing_files}")
+        return False
+    else:
+        print("\n✅ Installation verified successfully!")
+        return True
+
+def main():
+    """Main setup function"""
+    print("🚀 Amazon Reviews Sentiment Analysis - Setup")
+    print("=" * 50)
+    
+    # Run setup steps
+    steps = [
+        create_directories,
+        install_requirements,
+        download_nltk_data,
+        create_sample_config,
+        create_gitignore,
+        verify_installation
+    ]
+    
+    success_count = 0
+    for step in steps:
+        if step():
+            success_count += 1
+        print()  # Add spacing
+    
+    print("🎉 Setup Summary")
+    print(f"Completed {success_count}/{len(steps)} steps successfully")
+    
+    if success_count == len(steps):
+        print("\n✅ Setup completed! You can now run:")
+        print("   python train_model.py")
+    else:
+        print("\n⚠️  Some steps failed. Please check the errors above.")
+
+if __name__ == "__main__":
+    main()
